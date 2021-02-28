@@ -42,6 +42,7 @@ public class RecordServiceImpl implements RecordService {
 
     private Map<String, String> makeMap() {
         Map<String, String> map = new HashMap<>(10);
+        baseUrl=baseUrl.replace("#/log","");
         String[] values = baseUrl.split("\\u003F");
         String[] keys = values[1].split("&");
         for (String key : keys) {
