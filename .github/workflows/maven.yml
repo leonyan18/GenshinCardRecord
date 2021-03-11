@@ -21,7 +21,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      env：
+      env:
         BASEURL: ${{ secrets.BASEURL }}
         SENDKEY: ${{ secrets.SENDKEY }}
       run: mvn -B package --file pom.xml
