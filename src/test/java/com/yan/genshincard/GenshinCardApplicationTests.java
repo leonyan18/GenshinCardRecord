@@ -34,7 +34,11 @@ class GenshinCardApplicationTests {
 		CardData weapon=dataService.getCardData(cardList);
 		cardList=recordService.getNoviceRecordService();
 		CardData novice=dataService.getCardData(cardList);
-		sendService.sendMessage(novice,up,permanent,weapon);
+		String ans=sendService.makeTemplate(novice,up,permanent,weapon);
+		System.out.println("==============================");
+		System.out.println(ans);
+		System.out.println("==============================");
+		System.out.println(sendService.sendMessage(ans));
 	}
 
 }

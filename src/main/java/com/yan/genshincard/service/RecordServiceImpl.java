@@ -29,6 +29,12 @@ public class RecordServiceImpl implements RecordService {
         while (true) {
             map.put("page", String.valueOf(page));
             String result=HttpClient.doGet(makeUrl(getUrl,map));
+            if(JSONObject.parseObject(result).getString("data")==null){
+                System.out.println("==============================");
+                System.out.println("+++++++++地址错误或失效,请重新填写+++++++++");
+                System.out.println("==============================");
+                return cardList;
+            }
             JSONArray jsonArray=JSONObject.parseObject(result).getJSONObject("data").getJSONArray("list");
             List<Card> pageCardData=jsonArray.toJavaList(Card.class);
             if(pageCardData.size()==0){

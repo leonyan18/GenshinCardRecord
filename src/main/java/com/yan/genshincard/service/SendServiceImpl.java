@@ -4,6 +4,7 @@ import com.yan.genshincard.entity.CardData;
 import com.yan.genshincard.util.HttpClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,16 +21,25 @@ public class SendServiceImpl implements SendService {
     @Value(("${sendurl}"))
     private String url;
     @Override
-    public void sendMessage(CardData novice, CardData up, CardData permanent,CardData weapon) {
+    public String sendMessage(String template) {
+        if(!StringUtils.hasText(sendKey)){
+            return "SendKey is empty";
+        }
+        Map<String, Object> map=new HashMap<>(2);
+        map.put("title","原神抽卡统计");
+        map.put("desp",template);
+        return HttpClient.doPost(url,map);
+    }
+
+    @Override
+    public String makeTemplate(CardData novice, CardData up, CardData permanent, CardData weapon) {
         String result=makeTemplate(template,novice,"novice");
         result=makeTemplate(result,up,"up");
         result=makeTemplate(result,permanent,"permanent");
         result=makeTemplate(result,weapon,"weapon");
-        Map<String, Object> map=new HashMap<>(2);
-        map.put("title","原神抽卡统计");
-        map.put("desp",result);
-        HttpClient.doPost(url,map);
+        return result;
     }
+
 
     private String makeTemplate(String template,CardData data,String type){
         String result= template;
