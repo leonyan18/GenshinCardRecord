@@ -5,10 +5,15 @@ import com.yan.genshincard.entity.CardData;
 import com.yan.genshincard.service.DataService;
 import com.yan.genshincard.service.RecordService;
 import com.yan.genshincard.service.SendService;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.*;
 import java.util.List;
 
 @SpringBootTest
@@ -26,6 +31,7 @@ class GenshinCardApplicationTests {
 	}
 	@Test
 	void testRecordService(){
+		System.out.println(new File("data.xlsx").getAbsolutePath());
 		List<Card> cardList=recordService.getPermanentRecordService();
 		CardData permanent=dataService.getCardData(cardList);
 		cardList=recordService.getUpRecordService();
