@@ -44,7 +44,8 @@ class GenshinCardApplicationTests {
 		System.out.println("==============================");
 		System.out.println(ans);
 		System.out.println("==============================");
-		System.out.println(sendService.sendMessage(ans));
+		if(permanent.getCount()+up.getCount()+weapon.getCount()>0)
+			System.out.println(sendService.sendMessage(ans));
 	}
 
 }
