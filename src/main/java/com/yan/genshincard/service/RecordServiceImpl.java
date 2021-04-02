@@ -26,7 +26,9 @@ public class RecordServiceImpl implements RecordService {
         int page = 1;
         Map<String, String> map = makeMap();
         map.put("gacha_type",String.valueOf(gachaType));
+        Long end_id=0L;
         while (true) {
+            map.put("end_id",String.valueOf(end_id));
             map.put("page", String.valueOf(page));
             String result=HttpClient.doGet(makeUrl(getUrl,map));
             if(JSONObject.parseObject(result).getString("data")==null){
@@ -40,6 +42,7 @@ public class RecordServiceImpl implements RecordService {
             if(pageCardData.size()==0){
                 break;
             }
+            end_id=pageCardData.get(pageCardData.size()-1).getId();
             cardList.addAll(pageCardData);
             page++;
         }

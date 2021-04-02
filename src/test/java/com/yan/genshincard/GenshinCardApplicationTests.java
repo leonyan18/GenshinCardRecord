@@ -31,7 +31,6 @@ class GenshinCardApplicationTests {
 	}
 	@Test
 	void testRecordService(){
-		System.out.println(new File("data.xlsx").getAbsolutePath());
 		List<Card> cardList=recordService.getPermanentRecordService();
 		CardData permanent=dataService.getCardData(cardList);
 		cardList=recordService.getUpRecordService();

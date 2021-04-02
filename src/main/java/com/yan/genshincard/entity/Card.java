@@ -8,6 +8,7 @@ import java.util.Date;
  */
 @Data
 public class Card {
+    Long id;
     int gachaType;
     String itemType;
     String name;
